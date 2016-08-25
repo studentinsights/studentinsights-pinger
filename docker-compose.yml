@@ -1,0 +1,6 @@
+pinger:
+  build: .
+  volumes:
+    - .:/pinger
+  working_dir: /pinger
+  command: npm run ping
