@@ -9,7 +9,7 @@ variability in response times.
 
 
 // Casper configuration
-var TIMEOUT = 45000;
+var TIMEOUT = 60000;
 var casper = require('casper').create({
   logLevel: 'info',
   verbose: true,
