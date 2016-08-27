@@ -67,6 +67,18 @@ casper.start(config.baseUrl + '/', function() {
   });
 });
 
+// Ping sample homerooms
+[263, 204, 270, 48, 81, 114].forEach(function(homeroomId) {
+  var url = config.baseUrl + '/homerooms/' + homeroomId;
+  casper.thenOpen(url, function() {
+    console.log('Opened: ', url);
+    casper.waitForSelector('h1', function() {
+      this.echo(url + '  ' + this.fetchText('h1'));
+    }, TIMEOUT);
+  });
+});
+https://somerville.studentinsights.org/homerooms/100
+
 
 // Ping sample students
 [2238, 2482, 2813, 3689].forEach(function(studentId) {
