@@ -28,7 +28,7 @@ if (!env.USERNAME || !env.PASSWORD) {
   casper.exit(1);
 }
 var config = {
-  baseUrl: 'https://somerville.studentinsights.org',
+  baseUrl: env.BASE_URL_HTTPS,
   username: env.USERNAME,
   password: env.PASSWORD,
   studentIds: env.STUDENT_IDS.split(','),
@@ -72,7 +72,6 @@ config.homeroomIds.forEach(function(homeroomId) {
     }, TIMEOUT);
   });
 });
-https://somerville.studentinsights.org/homerooms/100
 
 
 // Ping sample students
