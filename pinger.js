@@ -30,7 +30,10 @@ if (!env.USERNAME || !env.PASSWORD) {
 var config = {
   baseUrl: 'https://somerville.studentinsights.org',
   username: env.USERNAME,
-  password: env.PASSWORD
+  password: env.PASSWORD,
+  studentIds: env.STUDENT_IDS.split(','),
+  homeroomIds: env.HOMEROOM_IDS.split(','),
+  schoolPaths: env.SCHOOL_PATHS.split(',')
 };
 
 
@@ -49,15 +52,7 @@ casper.start(config.baseUrl + '/', function() {
 
 
 // Ping all schools
-[
-  '/schools/brn',
-  '/schools/hea',
-  '/schools/kdy',
-  '/schools/afas',
-  '/schools/escs',
-  '/schools/wsns',
-  '/schools/whcs'
-].forEach(function(path) {
+config.schoolPaths.forEach(function(path) {
   var url = config.baseUrl + path;
   casper.thenOpen(url, function() {
     console.log('Opened: ', url);
@@ -68,7 +63,7 @@ casper.start(config.baseUrl + '/', function() {
 });
 
 // Ping sample homerooms
-[263, 204, 270, 48, 81, 114].forEach(function(homeroomId) {
+config.homeroomIds.forEach(function(homeroomId) {
   var url = config.baseUrl + '/homerooms/' + homeroomId;
   casper.thenOpen(url, function() {
     console.log('Opened: ', url);
@@ -81,7 +76,7 @@ https://somerville.studentinsights.org/homerooms/100
 
 
 // Ping sample students
-[2238, 2482, 2813, 3689].forEach(function(studentId) {
+config.studentIds.forEach(function(studentId) {
   var url = config.baseUrl + '/students/' + studentId;
   casper.thenOpen(url, function() {
     console.log('Opened: ', url);
